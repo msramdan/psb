@@ -68,10 +68,10 @@ $bayar = mysqli_fetch_array($get_pembayaran);
             <p class="card-text">Kehadiran Anda sangat berarti untuk meningkatkan Visi & Misi kami dalam membangun karakter yang lebih baik.</p>
             <p class="card-text"><small class="text-muted"><?= "Waktu: " . date("Y-m-d h:i:sa"); ?></small></p>
 
+            <a class="btn btn-primary mt-3 rounded-pill" href="bukti-pembayaran.php"><i class="bi bi-cloud-arrow-up-fill"></i> Upload Bukti Pembayaran</a>
             
             <!-- Mengecek Status Pembayaran dan Ada atau tidaknya user di sistem  -->
             <?php if(isset($bayar['id_pendaftaran']) == 0 || isset($bayar['status_pembayaran']) == 0):?>           
-                <a class="btn btn-primary mt-3 rounded-pill" href="bukti-pembayaran.php"><i class="bi bi-cloud-arrow-up-fill"></i> Upload Bukti Pembayaran</a>
             <?php endif;?>
                <!-- Mencetak bukti pendaftaran dari id pendaftaran yang dipanggil dan membukanya pada tab browser baru serta bisa di save ke PDF -->
             <a href="cetak-bukti.php?id=<?php echo $row['id_pendaftaran'] ?>" class="btn btn-success mt-3 rounded-pill"><i class="bi bi-printer-fill"></i> Cetak Bukti Daftar</a>

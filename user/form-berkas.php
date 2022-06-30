@@ -132,19 +132,19 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="ijazah_smp">Nilai Ijazah SMP</label>
-                        <input type="number" name="nilai_smp" class="form-control" min="75" max="100" autocomplete="on" required id="txtNumber">
+                        <input type="number" name="nilai_smp" class="form-control berkas" min="75" max="100" autocomplete="on" required id="txtNumber">
                         <div id="nilaiHelp" class="form-text text-danger">* Persyaratan penerimaan pendaftaran, nilai ijazah minimal harus 75 dan maximal 100.</div>
                     </div>
                 </div>
                 <div class="row" id="berkas-smk">
                     <div class="col-md-6 mb-3">
                         <label for="ijazah_smk">Berkas Ijazah SMK</label>
-                        <input type="file" name="ijazah_smk" class="form-control" autocomplete="on" required id="berkas_smk" onchange="return validasiEkstensiIjazah()">
+                        <input type="file" name="ijazah_smk" class="form-control berkas" autocomplete="on" required id="berkas_smk" onchange="return validasiEkstensiIjazah()">
                         <div id="ijazahsdHelp" class="form-text text-danger">* Format berkas ijazah ( pdf )</div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="ijazah_smk">Nilai Ijazah SMK</label>
-                        <input type="number" name="nilai_smk" class="form-control" min="75" max="100" autocomplete="on" required id="txtNumber">
+                        <input type="number" name="nilai_smk" class="form-control berkas" min="75" max="100" autocomplete="on" required id="txtNumber">
                         <div id="nilaiHelp" class="form-text text-danger">* Persyaratan penerimaan pendaftaran, nilai ijazah minimal harus 75 dan maximal 100.</div>
                     </div>
                 </div>
@@ -194,7 +194,7 @@ if (isset($_POST['submit'])) {
 </script>
 <script type="text/javascript">
     function validasiEkstensiIjazah() {
-        var inputFile = document.getElementById('berkas');
+        var inputFile = document.getElementsByClassName('berkas');
         var pathFile = inputFile.value;
         var ekstensiOk = /(\.pdf)$/i;
         if (!ekstensiOk.exec(pathFile)) {
