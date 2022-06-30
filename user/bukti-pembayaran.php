@@ -21,9 +21,9 @@ $verifkasi_email = $row['status_email'];
 $get_pembayaran = mysqli_query($conn, "SELECT * FROM tb_pembayaran WHERE id_pendaftaran='$id_pendaftaran'");
 $bayar = mysqli_fetch_array($get_pembayaran);
 $sts_pembayaran = $bayar['status_pembayaran'];
-if($sts_pembayaran == 0){
+if ($sts_pembayaran == 0) {
     $status_pembayaran = 'Belum terverifikasi';
-}else{
+} else {
     $status_pembayaran = 'Selesai';
 };
 
@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
     $filename = $_FILES['bukti_pembayaran']['name'];
     $ukuran = $_FILES['bukti_pembayaran']['size'];
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
-    $bukti_pembayaran = $rand.'_'.$filename;
+    $bukti_pembayaran = $rand . '_' . $filename;
 
     function cek_bukti_pembayaran($id_pendaftaran, $conn)
     {
@@ -44,34 +44,34 @@ if (isset($_POST['submit'])) {
         if ($result = mysqli_query($conn, $query)) return mysqli_num_rows($result);
     }
     if (cek_bukti_pembayaran($id_pendaftaran, $conn) == 0) {
-    $sql = "INSERT INTO tb_pembayaran (id_pendaftaran,bukti_pembayaran,status_pembayaran)
+        $sql = "INSERT INTO tb_pembayaran (id_pendaftaran,bukti_pembayaran,status_pembayaran)
     VALUES ( 
         '" . $id_pendaftaran . "',
         '" . $bukti_pembayaran . "',
         '" . 0 . "'
     )";
-    
-    $input = mysqli_query($conn, $sql);
-    if ($input) :
-        unlink('../user/bukti_pembayaran/'.$bayar['bukti_pembayaran']);
-        move_uploaded_file($_FILES['bukti_pembayaran']['tmp_name'], '../user/bukti_pembayaran/' . $bukti_pembayaran);
-        echo '<script>alert("Berhasil Mengupload File");</script>';
-        echo '<script>window.location="bukti-pembayaran"</script>';
-        // Jika gagal menginsert data siswa maka tampilkan kata huft, dan tampilkan errornya kenapa
-    else:
-        echo 'Huft ' . mysqli_error($conn);
-    endif;
-    }else{
-        $sql = "UPDATE tb_pembayaran SET bukti_pembayaran='$bukti_pembayaran' WHERE id_pendaftaran='$id_pendaftaran'";
-        
+
         $input = mysqli_query($conn, $sql);
         if ($input) :
-            unlink('../user/bukti_pembayaran/'.$bayar['bukti_pembayaran']);
-            move_uploaded_file($_FILES['bukti_pembayaran']['tmp_name'], '../user/bukti_pembayaran/'.$rand.'_'. $filename);
+            unlink('../user/bukti_pembayaran/' . $bayar['bukti_pembayaran']);
+            move_uploaded_file($_FILES['bukti_pembayaran']['tmp_name'], '../user/bukti_pembayaran/' . $bukti_pembayaran);
+            echo '<script>alert("Berhasil Mengupload File");</script>';
+            echo '<script>window.location="bukti-pembayaran"</script>';
+        // Jika gagal menginsert data siswa maka tampilkan kata huft, dan tampilkan errornya kenapa
+        else :
+            echo 'Huft ' . mysqli_error($conn);
+        endif;
+    } else {
+        $sql = "UPDATE tb_pembayaran SET bukti_pembayaran='$bukti_pembayaran' WHERE id_pendaftaran='$id_pendaftaran'";
+
+        $input = mysqli_query($conn, $sql);
+        if ($input) :
+            unlink('../user/bukti_pembayaran/' . $bayar['bukti_pembayaran']);
+            move_uploaded_file($_FILES['bukti_pembayaran']['tmp_name'], '../user/bukti_pembayaran/' . $rand . '_' . $filename);
             echo '<script>alert("Berhasil Mengupload File");</script>';
             echo '<script>window.location="bukti-pembayaran.php"</script>';
-            // Jika gagal menginsert data siswa maka tampilkan kata huft, dan tampilkan errornya kenapa
-        else:
+        // Jika gagal menginsert data siswa maka tampilkan kata huft, dan tampilkan errornya kenapa
+        else :
             echo 'Huft ' . mysqli_error($conn);
         endif;
     }
@@ -116,31 +116,39 @@ if (isset($_POST['submit'])) {
                 <?php endif; ?>
                 <h6>Nama Peserta : <?php echo $row['nm_peserta']; ?></h6>
                 <h6>Status Pembayaran : <span class="badge bg-success"><?php echo $status_pembayaran; ?></span></h6>
-                <img class="img-fluid" src="bukti_pembayaran/<?php echo $bayar['bukti_pembayaran'];?>" alt="<?php echo $bayar['bukti_pembayaran'];?>">
+                <img class="img-fluid" src="bukti_pembayaran/<?php echo $bayar['bukti_pembayaran']; ?>" alt="<?php echo $bayar['bukti_pembayaran']; ?>">
             </div>
             <div class="col-md-8">
                 <div class="row ">
                     <div class="col-md-12 p-3">
                         <div class="card-body">
+                            
+                        <p class="card-text"><small class="text-muted"><?= "Waktu: " . date("Y-m-d h:i:sa"); ?></small></p>
+                            <?php if ($bayar['status_pembayaran'] == 0) : ?>
+                                
                             <h5 class="card-title">Upload Bukti Pembayaran</h5>
                             <p class="card-text">Upload Bukti Pembayaran pada form berikut ini .</p>
-                             <form action="" method="POST" class="mb-3" enctype="multipart/form-data">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img style="max-height:300px;" id="preview-upload" />
+                                <form action="" method="POST" class="mb-3" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <img style="max-height:300px;" id="preview-upload" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
+                                    <div class="form-group">
 
-                                    <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                                    <input type="file" name="bukti_pembayaran" class="form-control bukti-upload" autocomplete="on" required id="bukti_pembayaran" accept="image/*" onchange="return validasiEkstensi(event)">
-                                    <div id="bukti_pembayaranHelp" class="form-text text-danger">* Format Bukti Pembayaran ( jpg / jpeg / png )</div>
-                                </div>
-                                <button class="btn btn-primary mt-3 rounded-pill" id="submit" name="submit" type="submit"><i class="bi bi-arrow-up-circle"></i> Upload Bukti Pembayaran</button>
-                            </form>
+                                        <label for="bukti_pembayaran">Bukti Pembayaran</label>
+                                        <input type="file" name="bukti_pembayaran" class="form-control bukti-upload" autocomplete="on" required id="bukti_pembayaran" accept="image/*" onchange="return validasiEkstensi(event)">
+                                        <div id="bukti_pembayaranHelp" class="form-text text-danger">* Format Bukti Pembayaran ( jpg / jpeg / png )</div>
+                                    </div>
+                                    <button class="btn btn-primary mt-3 rounded-pill" id="submit" name="submit" type="submit"><i class="bi bi-arrow-up-circle"></i> Upload Bukti Pembayaran</button>
+                                </form>
+                                
                             <span>Setelah upload hubungi kontak yang tertera dan lakukan konfirmasi, atau tunggu 1x24jam.</span>
-                           
-                            <p class="card-text"><small class="text-muted"><?= "Waktu: " . date("Y-m-d h:i:sa"); ?></small></p>
+                            <?php else : ?>
+                                <p>Pembayaran Selesai</p>
+                                <a class="btn btn-primary mb-3" href="index.php"><i class="bi bi-arrow-left-square"></i> Kembali</a>
+            
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
