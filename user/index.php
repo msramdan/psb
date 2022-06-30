@@ -54,7 +54,7 @@ $row = mysqli_fetch_array($get_pendaftar);
                 <p class="card-text">Agar mempermudah proses review, mohon konfirmasi email</p>
                 <p class="card-text">Kehadiran Anda sangat berarti untuk meningkatkan Visi & Misi kami dalam membangun karakter yang lebih baik.</p>
                 <p class="card-text"><small class="text-muted"><?= "Waktu: " . date("Y-m-d h:i:sa"); ?></small></p>
-            </div>
+            </div> 
         </div>
     </section>
 
