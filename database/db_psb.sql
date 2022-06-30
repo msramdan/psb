@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 30, 2022 at 03:47 AM
+-- Generation Time: Jun 30, 2022 at 08:14 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -50,7 +50,8 @@ INSERT INTO `tb_admin` (`id_admin`, `nm_admin`, `username`, `password`) VALUES
 CREATE TABLE `tb_pembayaran` (
   `id_pembayaran` int(11) NOT NULL,
   `id_pendaftaran` varchar(255) NOT NULL,
-  `bukti_pembayaran` varchar(255) NOT NULL
+  `bukti_pembayaran` varchar(255) NOT NULL,
+  `status_pembayaran` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -65,26 +66,36 @@ CREATE TABLE `tb_pendaftaran` (
   `th_ajaran` varchar(9) NOT NULL,
   `jurusan` varchar(50) NOT NULL,
   `nm_peserta` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `verifikasi_email` tinyint(1) NOT NULL DEFAULT '0',
+  `password` varchar(255) NOT NULL,
   `tmp_lahir` varchar(50) NOT NULL,
   `tgl_lahir` date NOT NULL,
   `jk` enum('Laki-laki','Perempuan') NOT NULL,
   `agama` varchar(15) NOT NULL,
   `almt_peserta` text NOT NULL,
-  `nilai` varchar(5) NOT NULL,
-  `photo` varchar(200) NOT NULL,
-  `berkas_ijazah` varchar(200) NOT NULL,
-  `status_terima` varchar(100) NOT NULL DEFAULT 'Sedang direview',
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `verifikasi_email` int(11) NOT NULL DEFAULT '0'
+  `photo` varchar(200) DEFAULT NULL,
+  `berkas_ijazah_sd` varchar(255) DEFAULT NULL,
+  `nilai_ijazah_sd` int(5) DEFAULT NULL,
+  `berkas_ijazah_smp` varchar(255) DEFAULT NULL,
+  `nilai_ijazah_smp` int(5) DEFAULT NULL,
+  `berkas_ijazah_smk` varchar(255) DEFAULT NULL,
+  `nilai_ijazah_smk` int(5) DEFAULT NULL,
+  `status_terima` varchar(100) NOT NULL DEFAULT 'Sedang direview'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_pendaftaran`
 --
 
-INSERT INTO `tb_pendaftaran` (`id_pendaftaran`, `tgl_daftar`, `th_ajaran`, `jurusan`, `nm_peserta`, `tmp_lahir`, `tgl_lahir`, `jk`, `agama`, `almt_peserta`, `nilai`, `photo`, `berkas_ijazah`, `status_terima`, `email`, `password`, `verifikasi_email`) VALUES
-('P2022-0001', '2022-06-30', '2022/2023', 'Tauhid', 'Rafael', 'www', '2000-01-06', 'Laki-laki', 'Islam', 'Bogor Indonesia', '80', '365854992_dummy-prod-1.jpg', '1771156681_dummies.pdf', 'Sedang direview', 'iandrewnew@gmail.com', '6b0d23b92a2b21295d3db817a0cd5fe5', 0);
+INSERT INTO `tb_pendaftaran` (`id_pendaftaran`, `tgl_daftar`, `th_ajaran`, `jurusan`, `nm_peserta`, `email`, `verifikasi_email`, `password`, `tmp_lahir`, `tgl_lahir`, `jk`, `agama`, `almt_peserta`, `photo`, `berkas_ijazah_sd`, `nilai_ijazah_sd`, `berkas_ijazah_smp`, `nilai_ijazah_smp`, `berkas_ijazah_smk`, `nilai_ijazah_smk`, `status_terima`) VALUES
+('P2022-0001', '2022-06-30', '2022/2023', 'Tauhid', 'Rafael', 'iandrewnew@gmail.com', 0, '6b0d23b92a2b21295d3db817a0cd5fe5', 'www', '2000-01-06', 'Laki-laki', 'Islam', 'Bogor Indonesia', '365854992_dummy-prod-1.jpg', '1771156681_dummies.pdf', 0, NULL, NULL, NULL, NULL, 'Sedang direview'),
+('P2022-0002', '2022-06-30', '2022/2023', 'Fiqih', 'Rafael Nuansa', 'rafaelnuansa@gmail.com', 0, '6b0d23b92a2b21295d3db817a0cd5fe5', 'bogor', '2000-06-21', 'Laki-laki', 'Islam', 'rafaelnuansa', '42276416_dummy-prod-1.jpg', '1724794893_dummies.pdf', 90, NULL, 90, '477577352_dummies.pdf', 90, 'Sedang direview'),
+('P2022-0003', '2022-06-30', '2022/2023', 'Tauhid', 'Test', 'rafael@gmail.com', 0, '6b0d23b92a2b21295d3db817a0cd5fe5', 'Bogor', '2000-06-01', 'Laki-laki', 'Islam', 'wwww', NULL, NULL, 0, NULL, NULL, NULL, NULL, 'Sedang direview'),
+('P2022-0004', '2022-06-30', '2022/2023', 'Hadist', 'Est vel in praesenti', 'pofu@mailinator.com', 0, '098f6bcd4621d373cade4e832627b4f6', 'Similique autem Nam ', '1986-02-09', 'Laki-laki', 'Islam', 'Explicabo Eligendi ', NULL, NULL, 0, NULL, NULL, NULL, NULL, 'Sedang direview'),
+('P2022-0005', '2022-06-30', '2022/2023', 'Ijtihad', 'Voluptate libero max', 'tecodovaw@mailinator.com', 0, 'f3ed11bbdb94fd9ebdefbaf646ab94d3', 'Assumenda aut aut re', '2022-12-26', 'Perempuan', 'Islam', 'Qui qui praesentium ', NULL, NULL, 0, NULL, NULL, NULL, NULL, 'Sedang direview'),
+('P2022-0006', '2022-06-30', '2022/2023', 'Hadist', 'Sed aliqua Elit bl', 'fecuj@mailinator.com', 0, 'f3ed11bbdb94fd9ebdefbaf646ab94d3', 'Quos voluptates porr', '2004-05-05', 'Laki-laki', 'Islam', 'Velit magnam alias r', NULL, NULL, 0, NULL, NULL, NULL, NULL, 'Sedang direview'),
+('P2022-0007', '2022-06-30', '2022/2023', 'Ijtihad', 'Quo est Nam quia ut ', 'nutovifi@mailinator.com', 0, 'f3ed11bbdb94fd9ebdefbaf646ab94d3', 'Voluptas veniam ips', '1973-04-27', 'Laki-laki', 'Islam', 'Qui ullamco consecte', NULL, NULL, 0, NULL, NULL, NULL, NULL, 'Sedang direview');
 
 --
 -- Indexes for dumped tables
