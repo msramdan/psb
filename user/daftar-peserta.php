@@ -31,25 +31,8 @@ include '../config/koneksi.php';
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="../img/Logo Assyifa2021.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                TPA Assyifa
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="btn btn-primary bi bi-window rounded-pill" href="../index.php"> Halaman Utama</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    
+    <?php include('../_partials/user/navbar2.php');?>
     <!-- Bagian content -->
     <section class="mt-5 mb-5 pt-5">
         <h2 class="text-center pt-5">Daftar Peserta</h2>
@@ -77,15 +60,12 @@ include '../config/koneksi.php';
                 </div>
             </form>
             <!-- end form serch -->
-
-
             <table id="example" class="table table-borderless table-dark table-striped table-hover" border="1">
                 <thead>
                     <tr>
                         <th class="text-center">No</th>
                         <th>ID Pendaftaran</th>
                         <th>Nama</th>
-                        <th>Nilai Ijazah</th>
                         <th>Jurusan</th>
                         <th>Jenis Kelamin</th>
                         <th>Status</th>
@@ -137,7 +117,6 @@ include '../config/koneksi.php';
                             <td class="text-center"><?php echo $no++ ?></td>
                             <td><?php echo $row['id_pendaftaran'] ?></td>
                             <td><?php echo $row['nm_peserta'] ?></td>
-                            <td><?php echo $row['nilai'] ?></td>
                             <td><?php echo $row['jurusan'] ?></td>
                             <td><?php echo $row['jk'] ?></td>
                             <?php if($row['status_terima']=="Sedang direview"){ ?>
@@ -179,56 +158,9 @@ include '../config/koneksi.php';
         </div>
     </section>
 
-    <footer class="bg-dark text-white p-5">
-        <div class="row">
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item active bg-secondary">LAYANAN APLIKASI</li>
-                    <li class="list-group-item">Pusat Pendaftaran</li>
-                    <li class="list-group-item">Cara Pendaftaran</li>
-                    <li class="list-group-item">Informasi</li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item active bg-secondary">TENTANG APLIKASI</li>
-                    <li class="list-group-item">
-                        <p>
-                            Sistem pembelajaran elektronik atau e-pembelajaran dapat didefinisikan sebagai sebuah bentuk teknologi
-                            informasi yang diterapkan di bidang pendidikan berupa situs web yang dapat diakses di mana saja. E-learning
-                            merupakan dasar dan konsekuensi logis dari perkembangan teknologi informasi dan komunikasi.
-                        </p>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item active bg-secondary">Mitra Kerja Sama</li>
-                    <li class="list-group-item">Baznas Baziz</li>
-                    <li class="list-group-item">AL-Fauz</li>
-                    <li class="list-group-item">Assalafy</li>
-                    <li class="list-group-item">As-Syafiiyah</li>
-                    <li class="list-group-item">PonPes Al-'Itqon</li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item active bg-secondary">Hubungi Kami</li>
-                    <li class="list-group-item">0813-8456-6778</li>
-                    <li class="list-group-item">tpaassyifa@gmail.com</li>
-                </ul>
-            </div>
-
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-        </div>
-    </footer>
-
-    <div class="copyright text-center text-white font-weight-bold bg-dark p-2">
-        <p>Bahrul Anwar &copy; 2022</p>
-    </div>
-
+    
+    <?php include('../_partials/user/footer.php');?>
+    
     <!-- My JQuery Data Tables JS -->
     <script src="../js/jquery-3.5.1.js"></script>
     <script src="../js/jquery.dataTables.min.js"></script>

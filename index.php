@@ -7,7 +7,7 @@
         header("Location: admin/beranda.php");
     exit;
     }
-
+    $userlogin = isset($_SESSION['user_login']);
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +25,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
         <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="assets/css/styles.css" rel="stylesheet" />
     </head>
@@ -41,10 +42,14 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link bi bi-layout-text-sidebar" target="_blank" href="user/daftar-peserta.php"> Daftar Peserta</a></li>
-                        <li class="nav-item"><a class="nav-link bi bi-arrow-right-circle" target="_blank" href="user/login.php"> Login</a></li>
-                        <li class="nav-item"><a class="nav-link bi bi-info-circle" target="_blank" href="user/informasi-pendaftaran.php"> Informasi Pendaftaran</a></li>
+                        <li class="nav-item"><a class="nav-link bi bi-layout-text-sidebar" href="user/daftar-peserta.php"> Daftar Peserta</a></li>
+                        <li class="nav-item"><a class="nav-link bi bi-info-circle" href="user/informasi-pendaftaran.php"> Informasi Pendaftaran</a></li>
                         <li class="nav-item"><a class="nav-link bi bi-file-person-fill" target="_blank" href="https://tpaassyifa.netlify.app/"> Tentang Kami</a></li>
+                        <?php if($userlogin == true):;?>
+                        <li class="nav-item"><a class="nav-link bi bi-person-circle" href="user/index.php"> Dashboard Peserta</a></li>
+                        <?php elseif($userlogin == false):?>
+                            <li class="nav-item"><a class="nav-link bi bi-arrow-right-circle" href="user/login.php"> Login</a></li>
+                        <?php endif;?>
                     </ul>
                 </div>
             </div>
@@ -99,8 +104,8 @@
                     </div>
                 </div>
                 <div class="social d-flex justify-content-center">
-                    <a class="mx-2" target="_blank" href="https://www.instagram.com/bhrlanwar/"><i class="bi bi-instagram"></i></a>
-                    <a class="mx-2" target="_blank" href="https://www.facebook.com/rifki.ramadhan.359778/"><i class="bi bi-facebook"></i></a>
+                    <a class="mx-2" href="https://www.instagram.com/bhrlanwar/"><i class="bi bi-instagram"></i></a>
+                    <a class="mx-2" href="https://www.facebook.com/rifki.ramadhan.359778/"><i class="bi bi-facebook"></i></a>
             </div>
         </section>
         

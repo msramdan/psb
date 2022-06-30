@@ -95,10 +95,29 @@ $p = mysqli_fetch_object($peserta);
         </tr>
 
         <tr>
-            <td>Nilai Ijazah</td>
+            <td>Email</td>
+            <td>:</td>
+            <!-- Mencetak nama lengkap -->
+            <td><?php echo $p->email ?></td>
+        </tr>
+        <tr>
+            <td>Nilai Ijazah SD</td>
             <td>:</td>
             <!-- Mencetak nilai -->
-            <td><?php echo $p->nilai ?></td>
+            <td><?php echo $p->nilai_ijazah_sd ?></td>
+        </tr>
+        <tr>
+            <td>Nilai Ijazah SMP</td>
+            <td>:</td>
+            <!-- Mencetak nilai -->
+            <td><?php echo $p->nilai_ijazah_smp ?></td>
+        </tr>
+        
+        <tr>
+            <td>Nilai Ijazah SMK</td>
+            <td>:</td>
+            <!-- Mencetak nilai -->
+            <td><?php echo $p->nilai_ijazah_smk ?></td>
         </tr>
 
         <tr>

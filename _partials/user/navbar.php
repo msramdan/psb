@@ -17,9 +17,6 @@ $stat_login = isset($_SESSION['user_login']);
                         <a class="btn btn-primary bi bi-window rounded-pill" href="../index.php"> Halaman Utama</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary bi bi-info-circle rounded-pill" href="../user/informasi-pendaftaran.php"> Informasi Pendaftaran</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="btn btn-warning bi bi-arrow-left-circle rounded-pill" href="../user/logout.php"> Logout</a>
                     </li>
                 </ul>
@@ -41,9 +38,6 @@ $stat_login = isset($_SESSION['user_login']);
                 <ul class="navbar-nav gap-2">
                     <li class="nav-item">
                         <a class="btn btn-primary bi bi-window rounded-pill" href="../index.php"> Halaman Utama</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary bi bi-info-circle rounded-pill" href="../user/informasi-pendaftaran.php"> Informasi Pendaftaran</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-warning bi bi-arrow-right-circle rounded-pill" href="../user/login.php"> Login</a>

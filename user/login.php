@@ -66,7 +66,7 @@
     }
     ?>
 
-    <?php include('../_partials/user/navbar.php');?>
+    <?php include('../_partials/user/navbar2.php');?>
     
     <!-- Bagian main login -->
     <div class="container pt-5 mt-5">
