@@ -18,7 +18,6 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Pendaftaran Santri TPA</title>
-
         <!-- My Icon -->
         <link rel="shortcut icon"  href="img/Logo Assyifa2021.png" />
         
@@ -43,7 +42,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link bi bi-layout-text-sidebar" target="_blank" href="user/daftar-peserta.php"> Daftar Peserta</a></li>
-                        <li class="nav-item"><a class="nav-link bi bi-arrow-right-circle" target="_blank" href="admin/login.php"> Login Admin</a></li>
+                        <li class="nav-item"><a class="nav-link bi bi-arrow-right-circle" target="_blank" href="user/login.php"> Login</a></li>
+                        <li class="nav-item"><a class="nav-link bi bi-info-circle" target="_blank" href="user/informasi-pendaftaran.php"> Informasi Pendaftaran</a></li>
                         <li class="nav-item"><a class="nav-link bi bi-file-person-fill" target="_blank" href="https://tpaassyifa.netlify.app/"> Tentang Kami</a></li>
                     </ul>
                 </div>

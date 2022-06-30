@@ -5,23 +5,20 @@ include '../config/koneksi.php';
 // Membuat session start agar sessionnya berjalan
 session_start();
 
-if (isset($_SESSION["stat_login"])) {
-    header("Location: ../admin/beranda.php");
+if (isset($_SESSION["user_login"])) {
+    header("Location: ../user/index.php");
     exit;
 }
 
 // Jika tombol submit ditekan
 if (isset($_POST['submit'])) {
-
     // Algorimta boyemore
     // Mengambil 1 id terbesar di kolom id_pendaftaran, lalu mengambil 5 buah karakter yang terhitung dari sebelah kanan ke kiri
     $getMaxId = mysqli_query($conn, "SELECT MAX(RIGHT(id_pendaftaran, 4)) AS id FROM tb_pendaftaran");
 
-
     // Kemudian menyimpannya dalam bentuk object mysqli_fetch_object
     $d = mysqli_fetch_object($getMaxId);
     $generateID = 'P' . date('Y') . '-' . sprintf("%04s", $d->id + 1);
-
 
     // photo
     $rand = rand();
@@ -39,42 +36,71 @@ if (isset($_POST['submit'])) {
     $ext2 = pathinfo($filename2, PATHINFO_EXTENSION);
     $nama_ijazah = $rand2.'_'.$filename2;
 
+    // Mengamankan dari SQL Injection
+    $email    = stripslashes($_POST['email']);
+    $email    = mysqli_real_escape_string($conn, $email);
+    $password = stripslashes($_POST['password']);
+    $password = mysqli_real_escape_string($conn, $password);
+    
+    $repass   = stripslashes($_POST['repass']);
+    $repass   = mysqli_real_escape_string($conn, $repass);
+    // Pengecekan password dan konfirmasi password jika sama maka
+    if($password == $repass){
+        // Mengubah ke md5
+        $pass  = md5($password);
 
-    $sql = "INSERT INTO tb_pendaftaran (id_pendaftaran,tgl_daftar,th_ajaran,jurusan,nm_peserta,tmp_lahir,tgl_lahir,jk,agama,almt_peserta,nilai,berkas_ijazah,photo,status_terima)
-        VALUES (
-            '" . $generateID . "',
-            '" . date('Y-m-d') . "',
-            '" . $_POST['th_ajaran'] . "',
-            '" . $_POST['jurusan'] . "',
-            '" . $_POST['nm'] . "',
-            '" . $_POST['tmp_lahir'] . "',
-            '" . $_POST['tgl_lahir'] . "',
-            '" . $_POST['jk'] . "',
-            '" . $_POST['agama'] . "',
-            '" . $_POST['alamat'] . "',
-            '" . $_POST['nilai'] . "',
-            '" . $nama_ijazah . "',
-            '" . $nama_photo . "',
-            '" . $_POST['status'] . "'
-        )";
-    $input = mysqli_query($conn, $sql);
+        // Function untuk cek email terdaftar atau tidak 
+        function cek_email($email,$conn){
+            $useremail = mysqli_real_escape_string($conn, $email);
+            $query = "SELECT * FROM tb_pendaftaran WHERE email = '$useremail'";
+            if( $result = mysqli_query($conn, $query) ) return mysqli_num_rows($result);
+        }
+        
+        if( cek_email($email,$con) == 0 ){
+                    //insert data ke database
+                    $sql = "INSERT INTO tb_pendaftaran (id_pendaftaran,tgl_daftar,th_ajaran,jurusan,nm_peserta,tmp_lahir,tgl_lahir,jk,agama,almt_peserta,nilai,berkas_ijazah,photo,status_terima,email,password)
+                    VALUES (
+                        '" . $generateID . "',
+                        '" . date('Y-m-d') . "',
+                        '" . $_POST['th_ajaran'] . "',
+                        '" . $_POST['jurusan'] . "',
+                        '" . $_POST['nm'] . "',
+                        '" . $_POST['tmp_lahir'] . "',
+                        '" . $_POST['tgl_lahir'] . "',
+                        '" . $_POST['jk'] . "',
+                        '" . $_POST['agama'] . "',
+                        '" . $_POST['alamat'] . "',
+                        '" . $_POST['nilai'] . "',
+                        '" . $nama_ijazah . "',
+                        '" . $nama_photo . "',
+                        '" . $_POST['status'] . "',
+                        '" . $email . "',
+                        '" . $pass . "'
+                    )";
+                    $input = mysqli_query($conn, $sql);
+                    // Jika berhasil menginsert data siswa maka akan masuk kedalam file halaman berhasil.php dan menampilkan generate id yang dibuat
+                    if ($input) {
+                        move_uploaded_file($_FILES['foto']['tmp_name'], '../foto/'.$rand.'_'.$filename);
+                        move_uploaded_file($_FILES['ijazah']['tmp_name'], '../ijazah/'.$rand2.'_'.$filename2);
+                        echo '<script>window.location="berhasil.php?id=' . $generateID . '"</script>';
+                        // Jika gagal menginsert data siswa maka tampilkan kata huft, dan tampilkan errornya kenapa
+                    } else {
+                        echo 'Huft ' . mysqli_error($conn);
+                    }
+        }else{
+            echo '<script>alert("Email telah terdaftar")</script>';
+        }
+    }else{
+        echo '<script>alert("Mohon cek pada bagian Password")</script>';
+    };
+    
 
-    // Jika berhasil menginsert data siswa maka akan masuk kedalam file halaman berhasil.php dan menampilkan generate id yang dibuat
-    if ($input) {
-        move_uploaded_file($_FILES['foto']['tmp_name'], '../foto/'.$rand.'_'.$filename);
-        move_uploaded_file($_FILES['ijazah']['tmp_name'], '../ijazah/'.$rand2.'_'.$filename2);
-        echo '<script>window.location="berhasil.php?id=' . $generateID . '"</script>';
-
-        // Jika gagal menginsert data siswa maka tampilkan kata huft, dan tampilkan errornya kenapa
-    } else {
-        echo 'Huft ' . mysqli_error($conn);
-    }
+   
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,10 +109,8 @@ if (isset($_POST['submit'])) {
 
     <!-- My Icon -->
     <link rel="shortcut icon" href="../img/Logo Assyifa2021.png" />
-
     <!-- My Bootstrap Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 
@@ -96,33 +120,13 @@ if (isset($_POST['submit'])) {
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="../img/Logo Assyifa2021.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                TPA Assyifa
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                <ul class="navbar-nav gap-2">
-                    <li class="nav-item">
-                        <a class="btn btn-primary bi bi-window rounded-pill" href="../index.php"> Halaman Utama</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-warning bi bi-arrow-right-circle rounded-pill" href="../admin/login.php"> Login Admin</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include('../_partials/user/navbar.php');?>
 
     <!-- Bagian box formulir -->
     <section class="pt-5 mt-5 mb-5">
         <!-- Bagian form -->
         <form action="" method="post" enctype="multipart/form-data">
-            <div class=" container card">
+            <div class="container card p-3">
                 <h2 class="text-center">Formulir Pendaftaran Peserta</h2>
                 <table border="0" class="table table-borderless table-responsive">
                     <tr>
@@ -240,6 +244,28 @@ if (isset($_POST['submit'])) {
                     </tr>
 
                     <tr>
+                        <td>Email</td>
+                        <td>:</td>
+                        <td>
+                            <input type="email" name="email" class="form-control rounded-pill" placeholder="Email Aktif" autocomplete="off" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Password</td>
+                        <td>:</td>
+                        <td>
+                            <input type="password" name="password" placeholder="Password" class="form-control rounded-pill" autocomplete="off" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Konfirmasi Password</td>
+                        <td>:</td>
+                        <td>
+                            <input type="password" name="repass" placeholder="Ulangi Password" class="form-control rounded-pill" autocomplete="off" required>
+                        </td>
+                    </tr>
+                    <tr>
                         <td></td>
                         <td></td>
                         <td>
@@ -253,56 +279,7 @@ if (isset($_POST['submit'])) {
         </form>
     </section>
 
-    <footer class="bg-dark text-white p-5">
-        <div class="row">
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item active bg-secondary">LAYANAN APLIKASI</li>
-                    <li class="list-group-item">Pusat Pendaftaran</li>
-                    <li class="list-group-item">Cara Pendaftaran</li>
-                    <li class="list-group-item">Informasi</li>
-                    <li class="list-group-item">Alumni</li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item active bg-secondary">TENTANG APLIKASI</li>
-                    <li class="list-group-item">
-                        <p>
-                            Sistem pembelajaran elektronik atau e-pembelajaran dapat didefinisikan sebagai sebuah bentuk teknologi
-                            informasi yang diterapkan di bidang pendidikan berupa situs web yang dapat diakses di mana saja. E-learning
-                            merupakan dasar dan konsekuensi logis dari perkembangan teknologi informasi dan komunikasi.
-                        </p>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item active bg-secondary">Mitra Kerja Sama</li>
-                    <li class="list-group-item">Baznas Baziz</li>
-                    <li class="list-group-item">AL-Fauz</li>
-                    <li class="list-group-item">Assalafy</li>
-                    <li class="list-group-item">As-Syafiiyah</li>
-                    <li class="list-group-item">PonPes Al-'Itqon</li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item active bg-secondary">Hubungi Kami</li>
-                    <li class="list-group-item">0813-8456-6778</li>
-                    <li class="list-group-item">tpaassyifa@gmail.com</li>
-                </ul>
-            </div>
-
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-        </div>
-    </footer>
-
-    <div class="copyright text-center text-white font-weight-bold bg-dark p-2">
-        <p>Bahrul Anwar &copy; 2022</p>
-    </div>
+    <?php include('../_partials/user/footer.php');?>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="../js/bootstrap.bundle.min.js"></script>

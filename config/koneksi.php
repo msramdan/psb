@@ -2,9 +2,14 @@
 
     // Mendeklarasikan variable koneksi untuk database MySQL
     $host = 'localhost';
-    $user = 'admin';
-    $pass = 'admin123';
+    $user = 'root';
+    $pass = '';
     $db   = 'db_psb'; 
+
+    // $host = 'localhost';
+    // $user = 'admin';
+    // $pass = 'admin123';
+    // $db   = 'db_psb'; 
 
     // Membuat variable $conn untuk membuat koneksi database MySQL melalui variable $host, $user, $pass, $db
     $conn = mysqli_connect($host, $user, $pass, $db);

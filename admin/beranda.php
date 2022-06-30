@@ -7,7 +7,6 @@ session_start();
 
 // Jika session status login tidak sama dengan true / tidak benar
 if ($_SESSION['stat_login'] != true) {
-
     // Maka akan dialihkan ke halaman login kembali
     header("Location: login.php");
     exit;

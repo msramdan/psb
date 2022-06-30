@@ -78,10 +78,11 @@
     scroll-behavior: smooth;
   }
 }
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
+  font-family: Quicksand;
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);

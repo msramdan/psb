@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
 body {
   background: #297F87;
   background: linear-gradient(to right, #7F7C82, #3DB2FF);
@@ -5,6 +7,7 @@ body {
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
+  font-family: Quicksand!important;
 }
 
 .btn-login {
