@@ -60,10 +60,10 @@ $bayar = mysqli_fetch_array($get_pembayaran);
             <?php endif;?>
             <h5 class="card-title">Terima Kasih telah mendaftar</h5>
             <p class="card-text">Pendaftaran Anda telah <span class="badge rounded-pill bg-success">Sedang direview oleh Admin</span>.</p>
-            <?php if($row['verifikasi_email'] == 0):?>            
+            <?php if($row['status_email'] == 0):?>            
             <span class="card-text">Agar mempermudah proses review, mohon konfirmasi email</span>
             <p>Mohon cek dan verfikasi email : <b><?php echo $row['email'];?></p></b>
-            <p>Klik dilink berikut untuk verifikasi : <span class="badge rounded-pill bg-success"><a href="#" class="text-decoration-none text-white">Kirim Aktivasi</a></span></p>
+            <p>Klik dilink berikut untuk verifikasi : <span class="badge rounded-pill bg-success"><a href="verifikasi.php" class="text-decoration-none text-white">Kirim Aktivasi</a></span></p>
             <?php endif;?>
             <p class="card-text">Kehadiran Anda sangat berarti untuk meningkatkan Visi & Misi kami dalam membangun karakter yang lebih baik.</p>
             <p class="card-text"><small class="text-muted"><?= "Waktu: " . date("Y-m-d h:i:sa"); ?></small></p>
