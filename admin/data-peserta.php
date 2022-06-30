@@ -31,7 +31,7 @@ if ($_SESSION['stat_login'] != true) {
 
     <!-- My Data Tables Bootstrap CSS -->
     <link rel="stylesheet" href="../css/dataTables.bootstrap5.min.css">
-
+ 
     <!-- My Swalert -->
     <link rel="../stylesheet" href="swalert/sweetalert2.min.css">
     <script src="../swalert/sweetalert2.min.js"></script>
@@ -41,48 +41,12 @@ if ($_SESSION['stat_login'] != true) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <!-- Bootstrap CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
-
+    <link href="../css/bootstrap.min.css" rel="stylesheet" >
 </head>
 
 <body>
 
-    <!-- Bagian navbar -->
-    <nav class="navbar navbar-expand-lg nav-tabs navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="../img/Logo Assyifa2021.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                TPA Assyifa
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-white rounded-pill" aria-current="page" href="beranda.php"><i class="bi bi-window"></i> Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white rounded-pill" href="data-peserta.php"><i class="bi bi-bar-chart-fill"></i> Data Peserta</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle rounded-pill" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-fill"></i> <?php echo $_SESSION['nama']; ?>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item text-center bi bi-power" href="../user/keluar.php"> Keluar</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+        <?php include('../_partials/admin/navbar.php');?>
 
     <!-- Bagian content -->
     <section class="mt-5 mb-5 pt-5">
@@ -158,7 +122,7 @@ if ($_SESSION['stat_login'] != true) {
                             <td class="text-center"><?php echo $no++ ?></td>
                             <td><?php echo $row['id_pendaftaran'] ?></td>
                             <td><?php echo $row['nm_peserta'] ?></td>
-                            <td><?php echo $row['nilai'] ?></td>
+                            <td><?php echo $row['nilai_ijazah_sd'] ?></td>
                             <td><?php echo $row['jk'] ?></td>
                             <?php if($row['status_terima']=="Sedang direview"){ ?>
                                 <td><span class="badge rounded-pill bg-gray">Sedang direview</span></td>

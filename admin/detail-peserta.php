@@ -132,12 +132,25 @@ $p = mysqli_fetch_object($peserta);
                 </tr>
 
                 <tr>
-                    <td>Nilai</td>
+                    <td>Nilai Ijazah SD</td>
                     <td>:</td>
                     <!-- Mencetak nama lengkap -->
-                    <td><?php echo $p->nilai ?></td>
+                    <td><?php echo $p->nilai_ijazah_sd ?></td>
+                </tr>
+                
+                <tr>
+                    <td>Nilai Ijazah SMP</td>
+                    <td>:</td>
+                    <!-- Mencetak nama lengkap -->
+                    <td><?php echo $p->nilai_ijazah_smp ?></td>
                 </tr>
 
+                <tr>
+                    <td>Nilai Ijazah SMK</td>
+                    <td>:</td>
+                    <!-- Mencetak nama lengkap -->
+                    <td><?php echo $p->nilai_ijazah_smk ?></td>
+                </tr>
                 <tr>
                     <td>Tempat, Tanggal Lahir</td>
                     <td>:</td>
@@ -175,7 +188,13 @@ $p = mysqli_fetch_object($peserta);
                     <td>Berkas Ijazah</td>
                     <td>:</td>
                     <!-- Mencetak Alamat -->
-                    <td><iframe src="../ijazah/<?=$p->berkas_ijazah ?>" width="600" height="400"></iframe></td>
+                    <td>
+                        <?php if($p->berkas_ijazah_sd != NULL):?>
+                        <a href="../ijazah/<?= $p->berkas_ijazah_sd ?>">Download</a>
+                        <?php else:?>
+                            <span class="badge badge-lg rounded-pill bg-danger">Belum Upload </span>
+                        <?php endif;?>
+                    </td>
                 </tr>
             </table>
         </div>
