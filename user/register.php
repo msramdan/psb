@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
 
         if (cek_email($email, $conn) == 0) {
             //insert data ke database
-            $sql = "INSERT INTO tb_pendaftaran (id_pendaftaran,tgl_daftar,th_ajaran,jurusan,nm_peserta,tmp_lahir,tgl_lahir,jk,agama,almt_peserta,status_terima,email,password)
+            $sql = "INSERT INTO tb_pendaftaran (id_pendaftaran,tgl_daftar,th_ajaran,jurusan,nm_peserta,tmp_lahir,tgl_lahir,jk,agama,alamat_jld,alamat_keldeskec,alamat_kab_kota,alamat_provinsi,status_terima,email,password)
                     VALUES ( 
                         '" . $generateID . "',
                         '" . date('Y-m-d') . "',
@@ -70,7 +70,10 @@ if (isset($_POST['submit'])) {
                         '" . $_POST['tgl_lahir'] . "',
                         '" . $_POST['jk'] . "',
                         '" . $_POST['agama'] . "',
-                        '" . $_POST['alamat'] . "',
+                        '" . $_POST['alamat_jld'] . "',
+                        '" . $_POST['alamat_keldeskec'] . "',
+                        '" . $_POST['alamat_kab_kota'] . "',
+                        '" . $_POST['alamat_provinsi'] . "',
                         '" . "Sedang direview" . "',
                         '" . $email . "',
                         '" . $pass . "'
@@ -178,11 +181,7 @@ if (isset($_POST['submit'])) {
 
                     <div class="row" id="data-3">
                         
-                        <div class="col-md-4 mb-3">
-                            <label for="alamat">Alamat Lengkap</label>
-                            <textarea class="form-control radius-0" style="height:100px" name="alamat" id="alamat" cols="30" rows="10" autocomplete="off" required></textarea>
-                        </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="jenis_kelamin">Jenis Kelamin</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="jk" value="Laki-laki">
@@ -198,9 +197,32 @@ if (isset($_POST['submit'])) {
                                 </label>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                         <label for="agama">Agama</label>
                         <input class="form-control" value="Islam" name="agama" readonly>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row" id="data-alamat">
+
+                        <div class="col-md-12">
+                            <label for="alamat">Alamat Lengkap</label>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                        <input class="form-control" id="alamat_jld" type="text" placeholder="Jalan / Linkungan / Dusun" name="alamat_jld" required>
+                        </div>
+                        
+                        <div class="col-md-12 mb-3">
+                        <input class="form-control" id="alamat_keldeskec" type="text" placeholder="Keluaran / Desa / Kecamatan" name="alamat_keldeskec" required>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                        <input class="form-control" id="alamat_kab_kota" type="text" placeholder="Kabupaten / Kota" name="alamat_kab_kota" required>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                        <input class="form-control" id="alamat_provinsi" type="text" placeholder="alamat_provinsi" name="alamat_provinsi" required>
                         </div>
                     </div>
                     <div class="form-group">

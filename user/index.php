@@ -17,8 +17,10 @@ $id_pendaftaran = $_SESSION['id'];
 $email = $_SESSION['email'];
 $get_pendaftar = mysqli_query($conn, "SELECT * FROM tb_pendaftaran WHERE id_pendaftaran='$id_pendaftaran'");
 $row = mysqli_fetch_array($get_pendaftar);
-$get_pembayaran = mysqli_query($conn, "SELECT * FROM tb_pembayaran WHERE id_pendaftaran='$id_pendaftaran'");
+$id_peserta = $row['id_pendaftaran'];
+$get_pembayaran = mysqli_query($conn, "SELECT * FROM tb_pembayaran WHERE id_pendaftaran='$id_peserta'");
 $bayar = mysqli_fetch_array($get_pembayaran);
+$statusbayar = $bayar['status_pembayaran'];
 ?>
 
 <!DOCTYPE html>
@@ -44,22 +46,86 @@ $bayar = mysqli_fetch_array($get_pembayaran);
     <section class="container mb-3 pt-5 mt-5">
         <div class="row g-0 bg-white p-4 shadow">
             
-            <div class="col-md-4">
-                <div class="card border-0">
+            <div class="col-md-3">
+                <div class="card border-0 mb-2">
                 <img src="../img/img1.svg" class="img-fluid rounded-start" alt="...">
                 </div>
+                
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
             <div class="card border-0">
             <div class="card-body">
             <h4 class="card-title">Kode Pendaftaran : <?php echo $row['id_pendaftaran'];?></h4>
-            <?php if(isset($row['photo']) == NULL || isset($row['berkas_ijazah_sd']) == NULL || isset($row['berkas_ijazah_smp']) == NULL || isset($row['berkas_ijazah_smk']) == NULL || isset($row['nilai_ijazah_sd']) == NULL || isset($row['nilai_ijazah_smp']) == NULL || isset($row['nilai_ijazah_smk']) == NULL):?>           
-                <h6>Mohon Lengkapi Data diri dan Berkas Persyaratan.</h6>
-                 <a href="form-berkas.php" class="btn btn-sm btn-primary rounded-pill"><i class="bi bi-person-fill"></i> Lengkapi Data</a>
-                <hr>
-            <?php endif;?>
+            <?php if($row['status_terima'] == 'Diterima'):?>
             <h5 class="card-title">Terima Kasih telah mendaftar</h5>
-            <p class="card-text">Pendaftaran Anda telah <span class="badge rounded-pill bg-success">Sedang direview oleh Admin</span>.</p>
+            <p class="card-text">Selamat!, Status Pendaftaran anda telah <span class="badge rounded-pill bg-success">Diterima</span>.</p>
+            <?php else:?>
+            <h5 class="card-title">Terima Kasih telah mendaftar</h5>
+            <p class="card-text">Pendaftaran anda <span class="badge rounded-pill bg-success">Sedang direview oleh Admin</span> Tunggu informasi lebih lanjut.</p>
+            <?php endif;?>
+            <table class="table table-bordered table-responsive mb-3">
+                <tr>
+                    <td>Nama Peserta</td>
+                    <td> <?php echo $row['nm_peserta'];?></td>
+                </tr>
+            <?php if($row['status_email'] == 1):?>  
+                <tr>
+                    <td>Email</td>
+                    <td> <?php echo $row['email'];?> <span class="badge rounded-pill bg-success">Terverifikasi</span></td>
+                </tr>      
+            <?php elseif($row['status_email'] == 0):?>
+                
+                <tr>
+                    <td>Email</td>
+                    <td> <?php echo $row['email'];?> <span class="badge rounded-pill bg-danger">Belum terverifikasi</span></td>
+                </tr>     
+            <?php endif;?>
+                <td>Tanggal Daftar</td>
+                    <td> <?php echo $row['tgl_daftar'];?></td>
+                </tr>
+                <td>Tahun Ajaran</td>
+                    <td> <?php echo $row['th_ajaran'];?></td>
+                </tr>
+                <td>Jurusan</td>
+                    <td> <?php echo $row['jurusan'];?></td>
+                </tr>
+                
+                <td>Berkas Terkumpul</td>
+                <td>
+                <?php if($row['photo'] > 0):?>  
+                    <span class="badge rounded-pill bg-dark">Pas foto</span> 
+                <?php endif;?>
+                
+                <?php if($row['berkas_ijazah_sd'] > 0):?>  
+                    <span class="badge rounded-pill bg-danger">Ijazah SD</span> 
+                <?php endif;?>
+                
+                <?php if($row['berkas_ijazah_smp'] > 0):?>  
+                    <span class="badge rounded-pill bg-primary">Ijazah SMP</span> 
+                <?php endif;?>
+
+                <?php if($row['berkas_ijazah_smk'] > 0):?>  
+                    <span class="badge rounded-pill bg-info">Ijazah SMK</span> 
+                <?php endif;?>
+                
+                </td>
+                </tr>
+                
+            <?php if($row['status_terima'] != 'Diterima' ):?>    
+                <tr>
+                    <td></td>
+                    <td>     <a href="form-berkas.php" class="btn btn-sm btn-primary rounded-pill"><i class="bi bi-paperclip"></i> Lengkapi Berkas</a>
+                    </td>
+                </tr>
+            <?php else:?>
+                  
+                <tr>
+                    <td>Status</td>
+                    <td><b>Diterima</b>
+                    </td>
+                </tr>
+            <?php endif;?>
+            </table>
             <?php if($row['status_email'] == 0):?>            
             <span class="card-text">Agar mempermudah proses review, mohon konfirmasi email</span>
             <p>Mohon cek dan verfikasi email : <b><?php echo $row['email'];?></p></b>
@@ -67,14 +133,14 @@ $bayar = mysqli_fetch_array($get_pembayaran);
             <?php endif;?>
             <p class="card-text">Kehadiran Anda sangat berarti untuk meningkatkan Visi & Misi kami dalam membangun karakter yang lebih baik.</p>
             <p class="card-text"><small class="text-muted"><?= "Waktu: " . date("Y-m-d h:i:sa"); ?></small></p>
-
-            <a class="btn btn-primary mt-3 rounded-pill" href="bukti-pembayaran.php"><i class="bi bi-cloud-arrow-up-fill"></i> Upload Bukti Pembayaran</a>
-            
+            <?php if($row['status_terima'] == 'Diterima' ):?>    
+                <a class="btn btn-primary mt-3 rounded-pill" href="bukti-pembayaran.php"><i class="bi bi-cloud-arrow-up-fill"></i> Upload Bukti Pembayaran</a>     
+            <?php endif;?>          
             <!-- Mengecek Status Pembayaran dan Ada atau tidaknya user di sistem  -->
-            <?php if(isset($bayar['id_pendaftaran']) == 0 || isset($bayar['status_pembayaran']) == 0):?>           
-            <?php endif;?>
-               <!-- Mencetak bukti pendaftaran dari id pendaftaran yang dipanggil dan membukanya pada tab browser baru serta bisa di save ke PDF -->
+            <?php if(isset($status_pembayaran) == 1 && $row['status_terima'] == 'Diterima' ):?> 
+                    <!-- Mencetak bukti pendaftaran dari id pendaftaran yang dipanggil dan membukanya pada tab browser baru serta bisa di save ke PDF -->
             <a href="cetak-bukti.php?id=<?php echo $row['id_pendaftaran'] ?>" class="btn btn-success mt-3 rounded-pill"><i class="bi bi-printer-fill"></i> Cetak Bukti Daftar</a>
+            <?php endif;?>
                 </div>
             </div>
             </div>

@@ -122,10 +122,8 @@ if (isset($_POST['submit'])) {
                 <div class="row ">
                     <div class="col-md-12 p-3">
                         <div class="card-body">
-                            
                         <p class="card-text"><small class="text-muted"><?= "Waktu: " . date("Y-m-d h:i:sa"); ?></small></p>
-                            <?php if ($bayar['status_pembayaran'] == 0) : ?>
-                                
+                            <?php if ($bayar['status_pembayaran'] == 0 && $row['status_terima'] == 'Diterima') : ?>
                             <h5 class="card-title">Upload Bukti Pembayaran</h5>
                             <p class="card-text">Upload Bukti Pembayaran pada form berikut ini .</p>
                                 <form action="" method="POST" class="mb-3" enctype="multipart/form-data">
@@ -186,8 +184,21 @@ if (isset($_POST['submit'])) {
                 });
             });
         </script>
-
-
+    <?php endif; ?>
+    
+    <?php
+    if ($row['status_terima'] == 'Sedang direview') : ?>
+        <script>
+            setTimeout(function() {
+                Swal.fire({
+                    title: 'Oops...',
+                    text: 'Akun anda sedang direview, belum bisa melanjutkan',
+                    icon: 'error',
+                }).then(function() {
+                    window.location = "index.php";
+                });
+            });
+        </script>
     <?php endif; ?>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="../js/bootstrap.bundle.min.js"></script>
