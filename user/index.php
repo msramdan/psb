@@ -132,10 +132,16 @@ $statusbayar = $bayar['status_pembayaran'];
                                 <td colspan="2">
                                     <center>
                                     <a href="../user/cetak-bukti.php?id=<?php echo $row['id_pendaftaran']; ?>" target="_blank" class="btn btn-sm btn-primary mb-2 rounded-pill"><i class="bi bi-printer-fill"></i> Print Bukti Pendaftaran</a>
-                                    </center>
+                                    <?php if(isset($bayar['id_pendaftaran']) == $row['id_pendaftaran']):?>
+                                        <a href="../user/cetak-pembayaran.php?id=<?php echo $row['id_pendaftaran']; ?>" target="_blank" class="btn btn-sm btn-primary mb-2 rounded-pill"><i class="bi bi-printer-fill"></i> Print Bukti Pembayaran</a>
+                                    <?php endif;?>
+                                      
+                                </center>
                                     
                                 </td>
+                                
                             </tr>
+
 
                         </table>
                         <?php if ($row['status_email'] == 0) : ?>
