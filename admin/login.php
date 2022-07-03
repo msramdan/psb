@@ -103,7 +103,7 @@
                             </div>
                             <div class="d-grid gap-3 mt-5">
                                 <button class="btn btn-success btn-login text-uppercase fw-bold rounded-pill" name="login" value="Login" type="submit"><i class="bi bi-arrow-right-circle"></i> Masuk</button>
-                                <a class="btn btn-register rounded-pill border border-dark" href="../user/register.php"><i class="bi bi-layout-text-sidebar"></i> Daftar Peserta</a>
+                                <!-- <a class="btn btn-register rounded-pill border border-dark" href="../user/register.php"><i class="bi bi-layout-text-sidebar"></i> Daftar Peserta</a> -->
                             </div>
                         </form>
                     </div>

@@ -36,19 +36,19 @@ try {
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'psbtpaassyfa@gmail.com';                 // SMTP username
-    $mail->Password = 'dibggwpftsahowbt';                           // SMTP password
+    $mail->Username = 'psbassyifa@gmail.com';                 // SMTP username
+    $mail->Password = 'yhvoextarlsttvwa';                           // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 465;                                    // TCP port to connect to
     //Recipients
-    $mail->setFrom('psbtpaassyfa@gmail.com', 'pmbtpaassyfa');
-    $mail->addAddress($email, 'rafael');     // Add a recipient
+    $mail->setFrom('psbassyifa@gmail.com', 'yhvoextarlsttvwa');
+    $mail->addAddress($email, 'admin');     // Add a recipient
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Verifikasi Akun, TPA Assyifa';
     $mail->Body    = "Untuk mengaktifkan akun anda silahkan klik link dibawah ini.
-    <a href='http://psb.test/user/aktivasi.php?t=".$token."'>http://psb.test/user/aktivasi.php?t=".$token."</a>  ";
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    <a href='http://localhost/psb/user/aktivasi.php?t=".$token."'>http://localhost/psb/user/aktivasi.php?t=".$token."</a>  ";
+    $mail->AltBody = 'Pesan dari admin PMB';
     $mail->send();
     echo "<script>alert('Kode Verifikasi Sudah Terkirim, Mohon cek email Anda')</script>"; 
     echo '<script>window.location="index.php"</script>';

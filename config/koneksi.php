@@ -2,8 +2,8 @@
 
     // Mendeklarasikan variable koneksi untuk database MySQL
     $host = 'localhost';
-    $user = 'root';
-    $pass = '';
+    $user = 'admin';
+    $pass = 'admin123';
     $db   = 'db_psb'; 
 
     // $host = 'localhost';

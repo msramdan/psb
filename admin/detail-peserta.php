@@ -84,8 +84,8 @@ $p = mysqli_fetch_object($peserta);
         <h2 class="text-center pt-5">Detail Peserta</h2>
         <div class="container table-responsive">
             <a href="../user/cetak-bukti.php?id=<?php echo $_GET['id'] ?>" target="_blank" class="btn btn-primary mb-2 rounded-pill"><i class="bi bi-printer-fill"></i> Print</a>
-            <a href="../admin/terima.php?id=<?php echo $_GET['id'] ?>"  onclick="return confirm('Yakin Terima Pendaftaran ?')" class="btn btn-success mb-2 rounded-pill"> Terima Pendaftaran</a>
-            <a href="../admin/tolak.php?id=<?php echo $_GET['id'] ?>"  onclick="return confirm('Yakin Tolak Pendaftaran?') " class="btn btn-danger mb-2 rounded-pill"> Tolak Pendaftaran</a>
+            <a href="../admin/terima.php?id=<?php echo $_GET['id'] ?>" onclick="return confirm('Yakin Terima Pendaftaran ?')" class="btn btn-success mb-2 rounded-pill"> Terima Pendaftaran</a>
+            <a href="../admin/tolak.php?id=<?php echo $_GET['id'] ?>" onclick="return confirm('Yakin Tolak Pendaftaran?') " class="btn btn-danger mb-2 rounded-pill"> Tolak Pendaftaran</a>
 
             <table class="table table-borderless table-striped table-light" border="0">
                 <tr>
@@ -130,19 +130,57 @@ $p = mysqli_fetch_object($peserta);
                     <!-- Mencetak nama lengkap -->
                     <td><?php echo $p->nm_peserta ?></td>
                 </tr>
-
                 <tr>
-                    <td>Nilai Ijazah SD</td>
+                    <td>Berkas Ijazah SD/MI</td>
+                    <td>:</td>
+                    <!-- Mencetak Alamat -->
+                    <td>
+                        <?php if ($p->berkas_ijazah_sd != NULL) : ?>
+                            <a href="../ijazah/<?= $p->berkas_ijazah_sd ?>">Download</a>
+                        <?php else : ?>
+                            <span class="badge badge-lg rounded-pill bg-danger">Belum Upload </span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nilai Ijazah SD/MI</td>
                     <td>:</td>
                     <!-- Mencetak nama lengkap -->
                     <td><?php echo $p->nilai_ijazah_sd ?></td>
                 </tr>
-                
+
                 <tr>
-                    <td>Nilai Ijazah SMP</td>
+                    <td>Berkas Ijazah SMP/MTS</td>
+                    <td>:</td>
+                    <!-- Mencetak Alamat -->
+                    <td>
+                        <?php if ($p->berkas_ijazah_smp != NULL) : ?>
+                            <a href="../ijazah/<?= $p->berkas_ijazah_smp ?>">Download</a>
+                        <?php else : ?>
+                            <span class="badge badge-lg rounded-pill bg-danger">Belum Upload </span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Nilai Ijazah SMP/MTS</td>
                     <td>:</td>
                     <!-- Mencetak nama lengkap -->
                     <td><?php echo $p->nilai_ijazah_smp ?></td>
+                </tr>
+
+
+                <tr>
+                    <td>Berkas Ijazah SMA/SMK</td>
+                    <td>:</td>
+                    <!-- Mencetak Alamat -->
+                    <td>
+                        <?php if ($p->berkas_ijazah_smk != NULL) : ?>
+                            <a href="../ijazah/<?= $p->berkas_ijazah_smk ?>">Download</a>
+                        <?php else : ?>
+                            <span class="badge badge-lg rounded-pill bg-danger">Belum Upload </span>
+                        <?php endif; ?>
+                    </td>
                 </tr>
 
                 <tr>
@@ -173,29 +211,42 @@ $p = mysqli_fetch_object($peserta);
                 </tr>
 
                 <tr>
-                    <td>Alamat</td>
+                    <td>Jalan / Lingkungan / Dusun</td>
                     <td>:</td>
                     <!-- Mencetak Alamat -->
-                    <td><?php echo $p->almt_peserta ?></td>
+                    <td><?php echo $p->alamat_jld ?></td>
+                </tr>
+                <tr>
+                    <td>Kelurahan / Desa / Kecamatan</td>
+                    <td>:</td>
+                    <!-- Mencetak Alamat -->
+                    <td><?php echo $p->alamat_keldeskec ?></td>
+                </tr>
+                <tr>
+                    <td>Kabupaten / Kota</td>
+                    <td>:</td>
+                    <!-- Mencetak Alamat -->
+                    <td><?php echo $p->alamat_kab_kota ?></td>
+                </tr>
+                <tr>
+                    <td>Provinsi</td>
+                    <td>:</td>
+                    <!-- Mencetak Alamat -->
+                    <td><?php echo $p->alamat_provinsi ?></td>
                 </tr>
                 <tr>
                     <td>Photo</td>
                     <td>:</td>
                     <!-- Mencetak Alamat -->
-                    <td><img src="../foto/<?=$p->photo ?>" width="150" height="auto" /></td>
+                    <?php if ($p->photo != NULL) : ?>
+                        <td><img src="../foto/<?= $p->photo ?>" width="150" height="auto" /></td>
+                    <?php else : ?>
+                        <td><span class="badge badge-lg rounded-pill bg-danger">Belum Upload </span></td>
+                    <?php endif; ?>
+
+
                 </tr>
-                <tr>
-                    <td>Berkas Ijazah</td>
-                    <td>:</td>
-                    <!-- Mencetak Alamat -->
-                    <td>
-                        <?php if($p->berkas_ijazah_sd != NULL):?>
-                        <a href="../ijazah/<?= $p->berkas_ijazah_sd ?>">Download</a>
-                        <?php else:?>
-                            <span class="badge badge-lg rounded-pill bg-danger">Belum Upload </span>
-                        <?php endif;?>
-                    </td>
-                </tr>
+
             </table>
         </div>
     </section>

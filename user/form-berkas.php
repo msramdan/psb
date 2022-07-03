@@ -146,36 +146,36 @@ if (isset($_POST['submit'])) {
                 </div>    
                 <div class="row" id="berkas-sd">
                     <div class="col-md-6 mb-3">
-                        <label for="ijazah_sd">Berkas Ijazah SD</label>
+                        <label for="ijazah_sd">Berkas Ijazah SD/MI</label>
                         <input type="file" name="ijazah_sd" class="form-control berkas" autocomplete="on" id="berkas_sd" onchange="return validasiEkstensiIjazahSD()">
                         <div id="ijazahsdHelp" class="form-text text-danger">* Format berkas ijazah ( pdf )</div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="ijazah_sd">Nilai Ijazah SD</label>
+                        <label for="ijazah_sd">Nilai Ijazah SD/MI</label>
                         <input type="number" name="nilai_sd" class="form-control" min="75" max="100" autocomplete="on" id="txtNumber">
                         <div id="nilaiHelp" class="form-text text-danger">* Persyaratan penerimaan pendaftaran, nilai ijazah minimal harus 75 dan maximal 100.</div>
                     </div>
                 </div>
                 <div class="row" id="berkas-smp">
                     <div class="col-md-6 mb-3">
-                        <label for="ijazah_smp">Berkas Ijazah SMP <span class="text-muted">(Optional)</span></label>
+                        <label for="ijazah_smp">Berkas Ijazah SMP/MTS <span class="text-muted">(Optional)</span></label>
                         <input type="file" name="ijazah_smp" class="form-control berkas" autocomplete="on" id="berkas_smp" onchange="return validasiEkstensiIjazahSMP()">
                         <div id="ijazahsdHelp" class="form-text text-danger">* Format berkas ijazah ( pdf )</div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="ijazah_smp">Nilai Ijazah SMP <span class="text-muted">(Optional)</span></label>
+                        <label for="ijazah_smp">Nilai Ijazah SMP/MTS  <span class="text-muted">(Optional)</span></label>
                         <input type="number" name="nilai_smp" class="form-control" min="75" max="100" autocomplete="on" id="txtNumber">
                         <div id="nilai_smpHelp" class="form-text text-danger">* Persyaratan penerimaan pendaftaran, nilai ijazah minimal harus 75 dan maximal 100.</div>
                     </div>
                 </div>
                 <div class="row" id="berkas-smk">
                     <div class="col-md-6 mb-3">
-                        <label for="ijazah_smk">Berkas Ijazah SMK <span class="text-muted">(Optional)</span></label>
+                        <label for="ijazah_smk">Berkas Ijazah SMA/SMK <span class="text-muted">(Optional)</span></label>
                         <input type="file" name="ijazah_smk" class="form-control berkas" autocomplete="on" id="berkas_smk" onchange="return validasiEkstensiIjazah()">
                         <div id="ijazahsdHelp" class="form-text text-danger">* Format berkas ijazah ( pdf )</div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="ijazah_smk">Nilai Ijazah SMK <span class="text-muted">(Optional)</span></label>
+                        <label for="ijazah_smk">Nilai Ijazah SMA/SMK <span class="text-muted">(Optional)</span></label>
                         <input type="number" name="nilai_smk" class="form-control" min="75" max="100" autocomplete="on" id="txtNumber">
                         <div id="nilai_smkHelp" class="form-text text-danger">* Persyaratan penerimaan pendaftaran, nilai ijazah minimal harus 75 dan maximal 100.</div>
                     </div>

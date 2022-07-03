@@ -27,7 +27,6 @@ $p = mysqli_fetch_object($peserta);
 </head>
 
 <body>
-
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -50,9 +49,8 @@ $p = mysqli_fetch_object($peserta);
             </div>
         </div>
     </div>
-
     <h2 class="text-center mt-3">Bukti Pendaftaran</h2>
-    <table class="table table-borderless table-striped mb-5 table-light" border="0">
+    <table class="table table-borderless table-striped mb-5 table-sm table-light" border="0">
         <tr>
             <td>Kode Pendaftaran</td>
             <td>:</td>
@@ -112,7 +110,7 @@ $p = mysqli_fetch_object($peserta);
             <!-- Mencetak nilai -->
             <td><?php echo $p->nilai_ijazah_smp ?></td>
         </tr>
-        
+
         <tr>
             <td>Nilai Ijazah SMK</td>
             <td>:</td>
@@ -142,10 +140,28 @@ $p = mysqli_fetch_object($peserta);
         </tr>
 
         <tr>
-            <td>Alamat</td>
+            <td>Jalan / Lingkungan / Dusun</td>
             <td>:</td>
             <!-- Mencetak Alamat -->
-            <td><?php echo $p->almt_peserta ?></td>
+            <td><?php echo $p->alamat_jld ?></td>
+        </tr>
+        <tr>
+            <td>Kelurahan / Desa / Kecamatan</td>
+            <td>:</td>
+            <!-- Mencetak Alamat -->
+            <td><?php echo $p->alamat_keldeskec ?></td>
+        </tr>
+        <tr>
+            <td>Kabupaten / Kota</td>
+            <td>:</td>
+            <!-- Mencetak Alamat -->
+            <td><?php echo $p->alamat_kab_kota ?></td>
+        </tr>
+        <tr>
+            <td>Provinsi</td>
+            <td>:</td>
+            <!-- Mencetak Alamat -->
+            <td><?php echo $p->alamat_provinsi ?></td>
         </tr>
     </table>
 
