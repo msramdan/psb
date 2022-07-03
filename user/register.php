@@ -222,7 +222,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         
                         <div class="col-md-6 mb-3">
-                        <input class="form-control" id="alamat_provinsi" type="text" placeholder="alamat_provinsi" name="alamat_provinsi" required>
+                        <input class="form-control" id="alamat_provinsi" type="text" placeholder="Provinsi" name="alamat_provinsi" required>
                         </div>
                     </div>
                     <div class="form-group">
