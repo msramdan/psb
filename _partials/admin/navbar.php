@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-white rounded-pill" href="data-peserta.php"><i class="bi bi-bar-chart-fill"></i> Data Peserta</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white rounded-pill" href="data-pembayaran.php"><i class="bi bi-bar-chart-fill"></i> Data Pembayaran</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle rounded-pill" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-fill"></i> <?php echo $_SESSION['nama']; ?>
