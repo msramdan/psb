@@ -51,7 +51,9 @@
                     <th>Tahun Ajaran</th>
                     <th>Jurusan</th>
                     <th>Nama Lengkap</th>
-                    <th>Nilai Ijazah</th>
+                    <th>Nilai Ijazah SD</th>
+                    <th>Nilai Ijazah SMP</th>
+                    <th>Nilai Ijazah SMK</th>
                     <th>Tempat, Tanggal Lahir</th>
                     <th>Jenis Kelamin</th>
                     <th>Agama</th>
@@ -70,11 +72,13 @@
                 <td>'. $row['th_ajaran'] .'</td>
                 <td>'. $row['jurusan'] .'</td>
                 <td>'. $row['nm_peserta'] .'</td>
-                <td>'. $row['nilai'] .'</td>
+                <td>'. $row['nilai_ijazah_sd'] .'</td>
+                <td>'. $row['nilai_ijazah_smp'] .'</td>
+                <td>'. $row['nilai_ijazah_smk'] .'</td>
                 <td>'. $row['tmp_lahir'].', '.$row['tgl_lahir'] .'</td>
                 <td>'. $row['jk'] .'</td>
                 <td>'. $row['agama'] .'</td>
-                <td>'. $row['almt_peserta'] .'</td>
+                <td>'. $row['alamat_jld'].' '.$row['alamat_keldeskec'].' '.$row['alamat_kab_kota'].''.$row['alamat_provinsi'] .'</td>
                 <td><span class="badge rounded-pill bg-success">'. $row['status_terima'] .'</span></td>
             </tr>';
         }

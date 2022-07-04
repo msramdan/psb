@@ -51,7 +51,9 @@
                         <th>Tahun Ajaran</th>
                         <th>Jurusan</th>
                         <th>Nama Lengkap</th>
-                        <th>Nilai Ijazah</th>
+                        <th>Nilai Ijazah SD</th>
+                        <th>Nilai Ijazah SMP</th>
+                        <th>Nilai Ijazah SMK</th>
                         <th>Tempat, Tanggal Lahir</th>
                         <th>Jenis Kelamin</th>
                         <th>Agama</th>
@@ -77,11 +79,29 @@
                         <td><?php echo $row['th_ajaran']?></td>
                         <td><?php echo $row['jurusan']?></td>
                         <td><?php echo $row['nm_peserta']?></td>
-                        <td><?php echo $row['nilai']?></td>
+                        <?php if($row['nilai_ijazah_sd'] == 0 || NULL):?>
+                            <td></td>
+                        <?php else:?>
+                        <td><?php echo $row['nilai_ijazah_sd']?></td>
+                        <?php endif;?>
+
+                        
+                        <?php if($row['nilai_ijazah_smp'] == 0 || NULL):?>
+                            <td></td>
+                        <?php else:?>
+                        <td><?php echo $row['nilai_ijazah_smp']?></td>
+                        <?php endif;?>
+
+                        
+                        <?php if($row['nilai_ijazah_smk'] == 0 || NULL):?>
+                            <td></td>
+                        <?php else:?>
+                        <td><?php echo $row['nilai_ijazah_smk']?></td>
+                        <?php endif;?>
                         <td><?php echo $row['tmp_lahir'].', '.$row['tgl_lahir'] ?></td>
                         <td><?php echo $row['jk']?></td>
                         <td><?php echo $row['agama']?></td>
-                        <td><?php echo $row['almt_peserta']?></td>
+                        <td><?php echo $row['alamat_jld'].' '.$row['alamat_keldeskec'].' '.$row['alamat_kab_kota'].''.$row['alamat_provinsi'];?></td>
                         <td><span class="badge rounded-pill bg-success"><?php echo $row['status_terima']?></span></td>
                     </tr>
                     <?php } ?>
